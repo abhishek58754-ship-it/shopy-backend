@@ -37,6 +37,12 @@ products = [
 next_product_id = 4
 
 
+@app.after_request
+def add_private_network_cors_header(response):
+    response.headers["Access-Control-Allow-Private-Network"] = "true"
+    return response
+
+
 def find_product(product_id):
     return next((product for product in products if product["id"] == product_id), None)
 
